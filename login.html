@@ -16,6 +16,12 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -27,12 +33,27 @@
                 <p class="text-[#64748B] mb-6">Sign in to manage your issues</p>
             </div>
             <div class="fieldset">
-                <legend class="fieldset-legend ">Username</legend>
-                <input type="text" class="input w-full" placeholder="Type here" />
-                <p class="label">Optional</p>
+                <h1 class="font-medium text-base">Username</h1>
+                <input type="text" class="input w-full" placeholder="Enter Username" />
+                <p class="text-sm text-[#4A00FF] font-normal">Default: admin</p>
+            </div>
+            <div class="fieldset mt-2">
+                <h1 class="font-medium text-base">Password</h1>
+                <input type="text" class="input w-full" placeholder="Enter Password" />
+                <p class="text-sm text-[#4A00FF] font-normal">Default: admin</p>
+            </div>
+            <button class="btn btn-primary btn-block mt-6 rounded-md">Sign In</button>
+            <div class="my-6 flex items-center">
+                <hr class="w-[45%] h-1 text-[#E4E4E7]">
+                <span class="w-[10%] text-[#1F2937] text-center">OR</span>
+                <hr class="w-[45%] h-1 text-[#E4E4E7]">
             </div>
             <div>
-
+                <P class="text-[#64748B] text-center mb-2 text-sm font-normal">Demo Credentials:</P>
+                <div class="bg-[#F8FAFC] text-center p-6 rounded-lg">
+                    <p><span class="font-semibold">Username:</span> admin</p>
+                    <p><span class="font-semibold">Password:</span> admin123</p>
+                </div>
             </div>
         </div>
     </section>
