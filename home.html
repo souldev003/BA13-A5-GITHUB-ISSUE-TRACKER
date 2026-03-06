@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issue Tracker | Soul Dev</title>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Daisy UI and Tailwind Css -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <main class="bg-[#F8FAFC]">
+
+        <nav class="mb-16 bg-white">
+            <div class="navbar bg-[#FFF] mx-auto container">
+                <div class="flex-1">
+                    <div class="text-xl flex items-center gap-2">
+                        <img class="max-w-9" src="./assets/github-logo.png" alt="github logo">
+                        <h1 class="text-[#1F2937] text-base md:text-2xl font-semibold">GitHub Issues Tracker</h1>
+
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                    <button class="btn btn-primary">
+                        <i class="fa-solid fa-plus"></i>
+                        New Issue
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <section class="p-6 max-w-6xl mx-auto flex gap-2 bg-[#FFF] shadow-md rounded-lg">
+            <button class="btn btn-primary btn-active">All</button>
+            <button class="btn">Open</button>
+            <button class="btn">Closed</button>
+        </section>
+
+        <section
+            class="mt-4 p-6 max-w-6xl mx-auto flex gap-2 bg-[#FFF] shadow-md rounded-t-lg border-b-2 border-[#d4d4d4]">
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-2">
+                    <img src="./assets/Aperture.png" alt="aperture logo">
+                    <div>
+                        <p>
+                            <span>50</span>
+                            Issue
+                        </p>
+                        <p>Track and manage your project issues</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1">
+                        <img src="./assets/Ellipse-1.png" alt="open status">
+                        <p>Open</p>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <img src="./assets/Ellipse-2.png" alt="open status">
+                        <p>Close</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#FBFBFB] max-w-6xl mx-auto p-6">
+            <div class="grid grid-cols-4 gap-3">
+                <div id="card" class="bg-white p-4">
+                    <div class="flex items-center justify-between">
+                        <img src="./assets/Open-Status.png" alt="open status">
+                        <button class="bg-[#FEECEC] py-2 px-6 text-[12px] text-[#EF4444] font-bold rounded-full">HIGH
+                        </button>
+                    </div>
+
+                    <div>
+                        <h1>Fix navigation menu on mobile devices</h1>
+                        <p>The navigation menu doesn't collapse properly on mobile devices...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="./script/home.js"></script>
+</body>
+
+</html>

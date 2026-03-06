@@ -32,17 +32,20 @@
                 <h2 class="mt-6 text-2xl text-[#1F2937] font-semibold mb-1">GitHub Issues Tracker</h2>
                 <p class="text-[#64748B] mb-6">Sign in to manage your issues</p>
             </div>
+
             <div class="fieldset">
                 <h1 class="font-medium text-base">Username</h1>
-                <input type="text" class="input w-full" placeholder="Enter Username" />
+                <input id="username-input" type="text" class="input w-full" placeholder="Enter Username" />
                 <p class="text-sm text-[#4A00FF] font-normal">Default: admin</p>
             </div>
             <div class="fieldset mt-2">
                 <h1 class="font-medium text-base">Password</h1>
-                <input type="text" class="input w-full" placeholder="Enter Password" />
-                <p class="text-sm text-[#4A00FF] font-normal">Default: admin</p>
+                <input id="password-input" type="text" class="input w-full" placeholder="Enter Password" />
+                <p class="text-sm text-[#4A00FF] font-normal">Default: admin123</p>
             </div>
-            <button class="btn btn-primary btn-block mt-6 rounded-md">Sign In</button>
+
+            <button onclick="signIn()" class="btn btn-primary btn-block mt-6 rounded-md">Sign In</button>
+
             <div class="my-6 flex items-center">
                 <hr class="w-[45%] h-1 text-[#E4E4E7]">
                 <span class="w-[10%] text-[#1F2937] text-center">OR</span>
@@ -58,7 +61,7 @@
         </div>
     </section>
 
-
+    <script src="./script/login.js"></script>
 </body>
 
 </html>
