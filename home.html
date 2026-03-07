@@ -33,7 +33,7 @@
     <main class="bg-[#F8FAFC]">
 
         <nav class="mb-16 bg-white">
-            <div class="navbar bg-[#FFF] mx-auto container">
+            <div class="navbar bg-[#FFF] max-w-[1440px] mx-auto container">
                 <div class="flex-1">
                     <div class="text-xl flex items-center gap-2">
                         <img class="max-w-9" src="./assets/github-logo.png" alt="github logo">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                    <input type="text" placeholder="🔍︎ Search Issue" class="input input-bordered w-24 md:w-auto" />
                     <button class="btn btn-primary">
                         <i class="fa-solid fa-plus"></i>
                         New Issue
@@ -52,9 +52,9 @@
         </nav>
 
         <section class="p-6 max-w-6xl mx-auto flex gap-2 bg-[#FFF] shadow-md rounded-lg">
-            <button class="btn btn-primary btn-active">All</button>
-            <button class="btn">Open</button>
-            <button class="btn">Closed</button>
+            <button class="btn btn-primary btn-active text-sm">All</button>
+            <button class="btn text-sm">Open</button>
+            <button class="btn text-sm">Closed</button>
         </section>
 
         <section
@@ -63,41 +63,166 @@
                 <div class="flex items-center gap-2">
                     <img src="./assets/Aperture.png" alt="aperture logo">
                     <div>
-                        <p>
+                        <p class="text-[#1F2937] font-semibold">
                             <span>50</span>
                             Issue
                         </p>
-                        <p>Track and manage your project issues</p>
+                        <p class="text-[#64748B]">Track and manage your project issues</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 max-[425px]:flex max-[425px]:flex-col">
                     <div class="flex items-center gap-1">
                         <img src="./assets/Ellipse-1.png" alt="open status">
-                        <p>Open</p>
+                        <p class="text-[#1F2937] font-medium">Open</p>
                     </div>
                     <div class="flex items-center gap-1">
                         <img src="./assets/Ellipse-2.png" alt="open status">
-                        <p>Close</p>
+                        <p class="text-[#1F2937] font-medium">Close</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="bg-[#FBFBFB] max-w-6xl mx-auto p-6">
-            <div class="grid grid-cols-4 gap-3">
-                <div id="card" class="bg-white p-4">
-                    <div class="flex items-center justify-between">
-                        <img src="./assets/Open-Status.png" alt="open status">
-                        <button class="bg-[#FEECEC] py-2 px-6 text-[12px] text-[#EF4444] font-bold rounded-full">HIGH
-                        </button>
+        <section id="all-section" class="bg-[#FBFBFB] max-w-6xl mx-auto p-6">
+            <div
+                class="grid grid-cols-1 gap-2 lg:grid lg:grid-cols-4 lg:gap-3 md:grid md:grid-cols-3 md:gap-3 sm:grid sm:grid-cols-2 sm:gap-3">
+                <!-- card 1 -->
+                <div id="card" class="bg-white  border-t-4 border-t-[#00A96E] rounded-lg shadow-lg cursor-pointer">
+                    <div class="pt-4 px-4">
+                        <div class="flex items-center justify-between">
+                            <img src="./assets/Open-Status.png" alt="open status">
+                            <button
+                                class="bg-[#FEECEC] py-[6px] px-6 text-xs text-[#EF4444] font-bold uppercase rounded-full">HIGH
+                            </button>
+                        </div>
+
+                        <div class="my-3">
+                            <h1 class="text-[#1F2937] text-sm capitalize font-semibold">Fix navigation menu on mobile
+                                devices</h1>
+                            <p class="text-[#64748B] text-xs mt-2">The navigation menu doesn't collapse properly on
+                                mobile
+                                devices...</p>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-5">
+                            <button
+                                class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full"><i
+                                    class="fa-solid fa-bug"></i> Bug
+                            </button>
+
+                            <button
+                                class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full"><i
+                                    class="fa-regular fa-life-ring"></i> help wanted
+                            </button>
+                        </div>
                     </div>
 
-                    <div>
-                        <h1>Fix navigation menu on mobile devices</h1>
-                        <p>The navigation menu doesn't collapse properly on mobile devices...</p>
+                    <hr class="w-full text-[#D7D7DA] ">
+
+                    <div class="p-4 flex flex-col gap-4">
+                        <p class="text-[#64748B] text-xs">
+                            <span>#1</span>
+                            by john_doe
+                        </p>
+                        <p class="text-[#64748B] text-xs">1/15/2024</p>
+                    </div>
+                </div>
+
+                <!-- closed card -->
+                <div id="card" class="bg-white  border-t-4 border-t-[#A754F5] rounded-lg shadow-lg cursor-pointer">
+                    <div class="pt-4 px-4">
+                        <div class="flex items-center justify-between">
+                            <img src="./assets/Closed- Status.png" alt="Closed status">
+                            <button
+                                class="bg-[#FEECEC] py-[6px] px-6 text-xs text-[#EF4444] font-bold uppercase rounded-full">Low
+                            </button>
+                        </div>
+
+                        <div class="my-3">
+                            <h1 class="text-[#1F2937] text-sm capitalize font-semibold">Fix navigation menu on mobile
+                                devices</h1>
+                            <p class="text-[#64748B] text-xs mt-2">The navigation menu doesn't collapse properly on
+                                mobile
+                                devices...</p>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-5">
+                            <button
+                                class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full"><i
+                                    class="fa-solid fa-bug"></i> Bug
+                            </button>
+
+                            <button
+                                class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full"><i
+                                    class="fa-regular fa-life-ring"></i> help wanted
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr class="w-full text-[#D7D7DA] ">
+
+                    <div class="p-4 flex flex-col gap-4">
+                        <p class="text-[#64748B] text-xs">
+                            <span>#1</span>
+                            by john_doe
+                        </p>
+                        <p class="text-[#64748B] text-xs">1/15/2024</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section id="open-section" class="bg-[#FBFBFB] max-w-6xl mx-auto p-6 hidden">
+            <div
+                class="grid grid-cols-1 gap-2 lg:grid lg:grid-cols-4 lg:gap-3 md:grid md:grid-cols-3 md:gap-3 sm:grid sm:grid-cols-2 sm:gap-3">
+                <div id="card" class="bg-white  border-t-4 border-t-[#00A96E] rounded-lg cursor-pointer">
+                    <div class="pt-4 px-4">
+                        <div class="flex items-center justify-between">
+                            <img src="./assets/Open-Status.png" alt="open status">
+                            <button
+                                class="bg-[#FEECEC] py-[6px] px-6 text-xs text-[#EF4444] font-bold capitalize rounded-full">HIGH
+                            </button>
+                        </div>
+
+                        <div class="my-3">
+                            <h1 class="text-[#1F2937] text-sm capitalize font-semibold">Fix navigation menu on mobile
+                                devices</h1>
+                            <p class="text-[#64748B] text-xs mt-2">The navigation menu doesn't collapse properly on
+                                mobile
+                                devices...</p>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-5">
+                            <button
+                                class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full"><i
+                                    class="fa-solid fa-bug"></i> Bug
+                            </button>
+
+                            <button
+                                class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full"><i
+                                    class="fa-regular fa-life-ring"></i> help wanted
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr class="w-full text-[#D7D7DA] ">
+
+                    <div class="p-4 flex flex-col gap-4">
+                        <p class="text-[#64748B] text-xs">
+                            <span>#1</span>
+                            by john_doe
+                        </p>
+                        <p class="text-[#64748B] text-xs">1/15/2024</p>
                     </div>
                 </div>
             </div>
+
+        </section>
+
+        <section id="closed-section" class="bg-[#FBFBFB] max-w-6xl mx-auto p-6">
+
         </section>
 
     </main>
