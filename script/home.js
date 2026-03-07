@@ -25,6 +25,24 @@ function showSection(clickedSection) {
   clickedSection.classList.remove("hidden");
 }
 
+// <button
+//                                 class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full">
+//                                 <i class="fa-solid fa-bug"></i> Bug
+//                             </button>
+
+//                             <button
+//                                 class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full">
+//                                 <i class="fa-regular fa-life-ring"></i> help wanted
+//                             </button>
+
+const createLabelBtn = (arr) => {
+  const res = arr.map(
+    (el) =>
+      `<button class="${el == "bug" ? "bg-[#FEECEC] text-[#EF4444] border-[#FECACA]" : el == "help wanted" ? "bg-[#FFF8DB] text-[#E2973B] border-[#FDE998]" : el == "enhancement" ? "bg-[#DEFCE8] text-[#00A96E] border-[#BBF7D0]" : el == "good first issue" ? "bg-[#E0F7FA] text-[#00838F] border-[#B2EBF2] text-[10px]" : "bg-[#E0F2FE] text-[#0369A1] border-[#BAE6FD]"} py-[6px] px-3 text-xs border-2 font-bold capitalize rounded-full">${el}</button>`,
+  );
+  return res.join("");
+};
+
 //Worker Functions
 //Tab Selection Area:
 allBtn.addEventListener("click", function () {
@@ -58,6 +76,13 @@ function loadData(data) {
     const borderColor =
       element.status === "open" ? "border-t-[#00A96E]" : "border-t-[#A855F7]";
 
+    const btnColor =
+      element.priority === "high"
+        ? "bg-[#FEECEC] text-[#EF4444]"
+        : element.priority === "medium"
+          ? "bg-[#FFF6D1] text-[#F7B43D]"
+          : "bg-[#EEEFF2] text-[#9CA3AF]";
+
     card.classList.add(
       "bg-white",
       "border-t-4",
@@ -71,7 +96,7 @@ function loadData(data) {
                         <div class="flex items-center justify-between">
                             <img src="${element.status == "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="">
                             <button
-                                class="bg-[#FEECEC] py-[6px] px-6 text-xs text-[#EF4444] font-bold uppercase rounded-full">${element.priority}
+                                class="${btnColor} py-[6px] px-6 text-xs font-bold uppercase rounded-full">${element.priority}
                             </button>
                         </div>
 
@@ -81,15 +106,7 @@ function loadData(data) {
                         </div>
 
                         <div class="flex items-center gap-2 mb-5">
-                            <button
-                                class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full">
-                                <i class="fa-solid fa-bug"></i> Bug
-                            </button>
-
-                            <button
-                                class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full">
-                                <i class="fa-regular fa-life-ring"></i> help wanted
-                            </button>
+                            ${createLabelBtn(element.labels)}
                         </div>
                     </div>
 
@@ -97,8 +114,8 @@ function loadData(data) {
 
                     <div class="p-4 flex flex-col gap-4">
                         <p class="text-[#64748B] text-xs">
-                            <span>#1</span>
-                            by john_doe
+                            <span>${element.id}</span>
+                            ${element.author}
                         </p>
                         <p class="text-[#64748B] text-xs">1/15/2024</p>
                     </div>
@@ -107,3 +124,7 @@ function loadData(data) {
     parentDiv.appendChild(card);
   });
 }
+
+// const label = ["hello", "hi", "bye"];
+
+// console.log(createLabelBtn(label));

@@ -10,8 +10,10 @@ function signIn() {
 
   if (userName != "admin") {
     alert("Invalid username");
+    return;
   } else if (password != "admin123") {
     alert("Invalid password");
+    return;
   } else {
     window.location.assign("home.html");
   }
