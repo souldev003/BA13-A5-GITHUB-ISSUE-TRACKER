@@ -25,37 +25,36 @@ function showSection(clickedSection) {
   clickedSection.classList.remove("hidden");
 }
 
-// <button
-//                                 class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full">
-//                                 <i class="fa-solid fa-bug"></i> Bug
-//                             </button>
-
-//                             <button
-//                                 class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full">
-//                                 <i class="fa-regular fa-life-ring"></i> help wanted
-//                             </button>
-
 const createLabelBtn = (arr) => {
   const res = arr.map(
     (el) =>
-      `<button class="${el == "bug" ? "bg-[#FEECEC] text-[#EF4444] border-[#FECACA]" : el == "help wanted" ? "bg-[#FFF8DB] text-[#E2973B] border-[#FDE998]" : el == "enhancement" ? "bg-[#DEFCE8] text-[#00A96E] border-[#BBF7D0]" : el == "good first issue" ? "bg-[#E0F7FA] text-[#00838F] border-[#B2EBF2] text-[10px]" : "bg-[#E0F2FE] text-[#0369A1] border-[#BAE6FD]"} py-[6px] px-3 text-xs border-2 font-bold capitalize rounded-full">${el}</button>`,
+      `<button class="${el == "bug" ? "bg-[#FEECEC] text-[#EF4444] border-[#FECACA]" : el == "help wanted" ? "bg-[#FFF8DB] text-[#E2973B] border-[#FDE998]" : el == "enhancement" ? "bg-[#DEFCE8] text-[#00A96E] border-[#BBF7D0]" : el == "good first issue" ? "bg-[#E0F7FA] text-[#00838F] border-[#B2EBF2]" : "bg-[#E0F2FE] text-[#0369A1] border-[#BAE6FD]"} py-[6px] px-2 text-[10px] border-2 font-bold capitalize rounded-full">${el == "bug" ? `<i class="fa-solid fa-bug"></i>` : el == "enhancement" ? `<i class="fa-solid fa-wand-magic-sparkles"></i>` : el == "good first issue" ? `<i class="fa-brands fa-battle-net"></i>` : `<i class="fa-regular fa-life-ring"></i>`} ${el}</button>`,
   );
   return res.join("");
 };
+
+function countGithubIssue(section) {
+  const childLength = section.children.length;
+  // const result = issueCount.innerText;
+  console.log(childLength);
+}
 
 //Worker Functions
 //Tab Selection Area:
 allBtn.addEventListener("click", function () {
   setActiveTab(allBtn);
   showSection(allSection);
+  countGithubIssue(allSection);
 });
 openBtn.addEventListener("click", function () {
   setActiveTab(openBtn);
   showSection(openSection);
+  countGithubIssue(openSection);
 });
 closedBtn.addEventListener("click", function () {
   setActiveTab(closedBtn);
   showSection(closedSection);
+  countGithubIssue(closedSection);
 });
 
 async function loadIssue() {
