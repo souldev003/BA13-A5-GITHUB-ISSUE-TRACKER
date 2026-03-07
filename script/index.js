@@ -6,7 +6,7 @@ function signIn() {
   const password = document
     .getElementById("password-input")
     .value.toLowerCase()
-    .trim(" ");
+    .trim();
 
   if (userName != "admin") {
     alert("Invalid username");
