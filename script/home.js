@@ -91,11 +91,11 @@ function loadData(data) {
 
     const shadow =
       element.status === "open"
-        ? "hover:shadow-lime-200"
+        ? "hover:shadow-[#0bee9f88]"
         : "hover:shadow-purple-200";
 
     card.innerHTML = `
-                  <div onclick="my_modal_5.showModal()" id="card" class="bg-white border-t-4 ${borderColor} rounded-lg shadow-md ${shadow} cursor-pointer">
+                  <div onclick="openIssueModal(${element.id})" id="card" class="bg-white border-t-4 ${borderColor} rounded-lg shadow-md ${shadow} cursor-pointer">
                     <div class="pt-4 px-4">
                         <div class="flex items-center justify-between">
                             <img src="${element.status == "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="">
@@ -173,7 +173,7 @@ function showOpenIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-                  <div onclick="my_modal_5.showModal()" id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg shadow-md cursor-pointer">
+                  <div onclick="openIssueModal(${element.id})" id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg shadow-md hover:shadow-[#0bee9f88] cursor-pointer">
                     <div class="pt-4 px-4">
                         <div class="flex items-center justify-between">
                             <img src="./assets/Open-Status.png" alt="open status">
@@ -237,7 +237,7 @@ function showClosedIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-          <div onclick="my_modal_5.showModal()" id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg shadow-lg cursor-pointer">
+          <div onclick="openIssueModal(${element.id})" id="card" class="bg-white border-t-4 border-t-[#A754F5] hover:shadow-[#a754f570] rounded-lg shadow-lg cursor-pointer">
             <div class="pt-4 px-4">
                 <div class="flex items-center justify-between">
                     <img src="./assets/Closed-Status.png" alt="closed status logo">
@@ -391,3 +391,84 @@ searchBtn.addEventListener("click", async () => {
     hideSpinner();
   });
 });
+
+async function openIssueModal(id) {
+  showSpinner();
+
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+  );
+
+  const data = await res.json();
+  const issue = data.data;
+
+  const modal = document.getElementById("modal-content");
+
+  const statusColor =
+    issue.status === "open"
+      ? "bg-[#00A96E] text-white"
+      : "bg-purple-500 text-white";
+
+  const priorityColor =
+    issue.priority === "high"
+      ? "bg-[#EF4444] text-white"
+      : issue.priority === "medium"
+        ? "bg-[#FFF6D1] text-[#F7B43D]"
+        : "bg-[#EEEFF2] text-[#9CA7C1]";
+
+  const assigneeName = issue.assignee
+    ? issue.assignee.replaceAll("_", " ")
+    : "Not Found";
+
+  modal.innerHTML = `
+  
+  <h2 class="text-2xl font-bold mb-2">
+    ${issue.title}
+  </h2>
+
+  <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+      <span class="px-3 py-1 rounded-full text-xs ${statusColor}">
+        ${issue.status}
+      </span>
+
+      <span>● Opened by ${issue.author.replaceAll("_", " ")}</span>
+
+      <span>● ${issue.createdAt.slice(0, 10)} </span>
+  </div>
+
+  <div class="flex gap-2 mb-4 flex-wrap">
+    ${createLabelBtn(issue.labels)}
+  </div>
+
+  <p class="text-[#64748B] text-sm mb-6">
+    ${issue.description}
+  </p>
+
+  <div class="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
+
+      <div>
+        <p class="text-gray-400 text-sm">Assignee:</p>
+        <p class="font-semibold">${assigneeName}</p>
+      </div>
+
+      <div>
+        <p class="text-gray-400 text-sm">Priority:</p>
+        <span class="px-3 py-1 rounded-full text-xs ${priorityColor}">
+          ${issue.priority.toUpperCase()}
+        </span>
+      </div>
+
+  </div>
+
+  <div class="modal-action">
+    <form method="dialog">
+      <button class="btn btn-primary">Close</button>
+    </form>
+  </div>
+
+  `;
+
+  hideSpinner();
+
+  my_modal_5.showModal();
+}
