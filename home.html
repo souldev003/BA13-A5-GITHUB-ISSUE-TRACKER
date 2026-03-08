@@ -42,8 +42,9 @@
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <input type="text" placeholder="🔍︎ Search Issue" class="input input-bordered w-24 md:w-auto" />
-                    <button class="btn btn-primary">
+                    <input id="search-ber" type="text" placeholder="🔍︎ Search Issue"
+                        class="input input-bordered w-24 md:w-auto" />
+                    <button id="search-btn" class="btn btn-primary">
                         <i class="fa-solid fa-plus"></i>
                         New Issue
                     </button>
@@ -86,91 +87,6 @@
         <section id="all-section" class="bg-[#FBFBFB] max-w-6xl mx-auto p-6">
             <div id="cards-parent"
                 class="grid grid-cols-1 gap-2 lg:grid lg:grid-cols-4 lg:gap-3 md:grid md:grid-cols-3 md:gap-3 sm:grid sm:grid-cols-2 sm:gap-3">
-                <!-- card 1 -->
-                <!-- <div id="card" class="bg-white  border-t-4 border-t-[#00A96E] rounded-lg shadow-lg cursor-pointer">
-                    <div class="pt-4 px-4">
-                        <div class="flex items-center justify-between">
-                            <img src="./assets/Open-Status.png" alt="open status">
-                            <button
-                                class="bg-[#FEECEC] py-[6px] px-6 text-xs text-[#EF4444] font-bold uppercase rounded-full">HIGH
-                            </button>
-                        </div>
-
-                        <div class="my-3">
-                            <h1 class="text-[#1F2937] text-sm capitalize font-semibold">Fix navigation menu on mobile
-                                devices</h1>
-                            <p class="text-[#64748B] text-xs mt-2">The navigation menu doesn't collapse properly on
-                                mobile
-                                devices...</p>
-                        </div>
-
-                        <div class="flex items-center gap-2 mb-5">
-                            <button
-                                class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full"><i
-                                    class="fa-solid fa-bug"></i> Bug
-                            </button>
-
-                            <button
-                                class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full"><i
-                                    class="fa-regular fa-life-ring"></i> help wanted
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="w-full h-[2px] bg-[#D7D7DA]"></div>
-
-                    <div class="p-4 flex flex-col gap-4">
-                        <p class="text-[#64748B] text-xs">
-                            <span>#1</span>
-                            by john_doe
-                        </p>
-                        <p class="text-[#64748B] text-xs">1/15/2024</p>
-                    </div>
-                </div> -->
-
-                <!-- closed card -->
-                <!-- <div id="card" class="bg-white  border-t-4 border-t-[#A754F5] rounded-lg shadow-lg cursor-pointer">
-                    <div class="pt-4 px-4">
-                        <div class="flex items-center justify-between">
-                            <img src="./assets/Closed-Status.png" alt="Closed status">
-                            <button
-                                class="bg-[#e7e7e7] py-[6px] px-6 text-xs text-[#a3a3a3] font-bold uppercase rounded-full">Low
-                            </button>
-                        </div>
-
-                        <div class="my-3">
-                            <h1 class="text-[#1F2937] text-sm capitalize font-semibold">Fix navigation menu on mobile
-                                devices</h1>
-                            <p class="text-[#64748B] text-xs mt-2">The navigation menu doesn't collapse properly on
-                                mobile
-                                devices...</p>
-                        </div>
-
-                        <div class="flex items-center gap-2 mb-5">
-                            <button
-                                class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full"><i
-                                    class="fa-solid fa-bug"></i> Bug
-                            </button>
-
-                            <button
-                                class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full"><i
-                                    class="fa-regular fa-life-ring"></i> help wanted
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="w-full h-[2px] bg-[#D7D7DA]"></div>
-
-                    <div class="p-4 flex flex-col gap-4">
-                        <p class="text-[#64748B] text-xs">
-                            <span>#1</span>
-                            by john_doe
-                        </p>
-                        <p class="text-[#64748B] text-xs">1/15/2024</p>
-                    </div>
-                </div> -->
-
-
             </div>
         </section>
 
@@ -222,48 +138,8 @@
         </section>
 
         <section id="closed-section" class="bg-[#FBFBFB] max-w-6xl mx-auto p-6 hidden">
-            <div id="closed-issue-section"
+            <div id="closed-section-parent"
                 class="grid grid-cols-1 gap-2 lg:grid lg:grid-cols-4 lg:gap-3 md:grid md:grid-cols-3 md:gap-3 sm:grid sm:grid-cols-2 sm:gap-3">
-                <div id="card" class="bg-white  border-t-4 border-t-[#A754F5] rounded-lg shadow-lg cursor-pointer">
-                    <div class="pt-4 px-4">
-                        <div class="flex items-center justify-between">
-                            <img src="./assets/Closed-Status.png" alt="Closed status">
-                            <button
-                                class="bg-[#e7e7e7] py-[6px] px-6 text-xs text-[#a3a3a3] font-bold uppercase rounded-full">Low
-                            </button>
-                        </div>
-
-                        <div class="my-3">
-                            <h1 class="text-[#1F2937] text-sm capitalize font-semibold">Fix navigation menu on mobile
-                                devices</h1>
-                            <p class="text-[#64748B] text-xs mt-2">The navigation menu doesn't collapse properly on
-                                mobile
-                                devices...</p>
-                        </div>
-
-                        <div class="flex items-center gap-2 mb-5">
-                            <button
-                                class="bg-[#FEECEC] py-[6px] px-3 text-xs text-[#EF4444] border-2 border-[#FECACA] font-bold capitalize rounded-full"><i
-                                    class="fa-solid fa-bug"></i> Bug
-                            </button>
-
-                            <button
-                                class="bg-[#FFF8DB] py-[6px] px-3 text-xs text-[#D97706] border-2 border-[#FDE68A] font-bold capitalize rounded-full"><i
-                                    class="fa-regular fa-life-ring"></i> help wanted
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="w-full h-[2px] bg-[#D7D7DA]"></div>
-
-                    <div class="p-4 flex flex-col gap-4">
-                        <p class="text-[#64748B] text-xs">
-                            <span>#1</span>
-                            by john_doe
-                        </p>
-                        <p class="text-[#64748B] text-xs">1/15/2024</p>
-                    </div>
-                </div>
             </div>
         </section>
 
