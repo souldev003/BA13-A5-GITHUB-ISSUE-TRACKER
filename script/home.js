@@ -137,6 +137,53 @@ async function loadClosedIssue() {
 function showClosedIssue(data) {
   const closedCardParent = document.getElementById("closed-issue-section");
   closedCardParent.innerHTML = "";
+
+  const getClosedIssues = data.filter((element) => element.status == "closed");
+
+  getClosedIssues.forEach((element) => {
+    const card = document.createElement("div");
+
+    const btnColor =
+      element.priority === "high"
+        ? "bg-[#FEECEC] text-[#EF4444]"
+        : element.priority === "medium"
+          ? "bg-[#FFF6D1] text-[#F7B43D]"
+          : "bg-[#EEEFF2] text-[#9CA3AF]";
+
+    card.innerHTML = `
+          <div id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg cursor-pointer">
+            <div class="pt-4 px-4">
+                <div class="flex items-center justify-between">
+                    <img src="./assets/Closed-Status.png" alt="closed status logo">
+                    <button
+                        class="${btnColor} py-[6px] px-6 text-xs font-bold capitalize rounded-full">${element.priority}
+                    </button>
+                </div>
+
+                <div class="my-3">
+                  <h1 class="text-[#1F2937] text-sm capitalize font-semibold line-clamp-1">${element.title}</h1>
+                  <p class="text-[#64748B] text-xs mt-2 line-clamp-2">${element.description}</p>
+                </div>
+
+                <div class="flex items-center gap-2 mb-5">
+                ${createLabelBtn(element.labels)}
+                </div>
+            </div>
+
+            <div class="w-full h-[2px] bg-[#D7D7DA]"></div>
+
+            <div class="p-4 flex flex-col gap-4">
+                <p class="text-[#64748B] text-xs">
+                    <span>#${element.id}</span> by 
+                    ${element.author.replaceAll("_", " ").toUpperCase()}
+                </p>
+                <p class="text-[#64748B] text-xs">${element.createdAt.slice(0, 10)}</p>
+            </div>
+          </div>
+`;
+
+    closedCardParent.appendChild(card);
+  });
 }
 
 async function loadOpenIssue() {
