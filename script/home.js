@@ -324,6 +324,15 @@ document.addEventListener("click", (elm) => {
   }
 });
 
-async function searchIssue(searchText) {
-  const result = fetch("");
-}
+searchBtn.addEventListener("click", async () => {
+  const searchText = searchInput.value.trim().toLowerCase();
+
+  console.log(searchText);
+
+  const result = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`,
+  );
+
+  const data = await result.json();
+  console.log(data);
+});
