@@ -19,6 +19,8 @@ const originalBtnHTML = searchBtn.innerHTML;
 
 const spinner = document.getElementById("spinner");
 
+let currentSearchResults = null;
+
 function showSpinner() {
   spinner.classList.remove("hidden");
 }
@@ -76,6 +78,7 @@ function loadData(data) {
 
   data.forEach((element) => {
     const card = document.createElement("div");
+
     const borderColor =
       element.status === "open" ? "border-t-[#00A96E]" : "border-t-[#A855F7]";
 
@@ -86,15 +89,13 @@ function loadData(data) {
           ? "bg-[#FFF6D1] text-[#F7B43D]"
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
-    card.classList.add(
-      "bg-white",
-      "border-t-4",
-      borderColor,
-      "rounded-lg",
-      "shadow-lg",
-      "cursor-pointer",
-    );
+    const shadow =
+      element.status === "open"
+        ? "hover:shadow-lime-200"
+        : "hover:shadow-purple-200";
+
     card.innerHTML = `
+                  <div onclick="my_modal_5.showModal()" id="card" class="bg-white border-t-4 ${borderColor} rounded-lg shadow-md ${shadow} cursor-pointer">
                     <div class="pt-4 px-4">
                         <div class="flex items-center justify-between">
                             <img src="${element.status == "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="">
@@ -122,6 +123,7 @@ function loadData(data) {
                         </p>
                         <p class="text-[#64748B] text-xs">${element.createdAt.slice(0, 10)}</p>
                     </div>
+                  </div>
   `;
 
     parentDiv.appendChild(card);
@@ -171,7 +173,7 @@ function showOpenIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-                  <div id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg cursor-pointer">
+                  <div onclick="my_modal_5.showModal()" id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg shadow-md cursor-pointer">
                     <div class="pt-4 px-4">
                         <div class="flex items-center justify-between">
                             <img src="./assets/Open-Status.png" alt="open status">
@@ -235,7 +237,7 @@ function showClosedIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-          <div id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg cursor-pointer">
+          <div onclick="my_modal_5.showModal()" id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg shadow-lg cursor-pointer">
             <div class="pt-4 px-4">
                 <div class="flex items-center justify-between">
                     <img src="./assets/Closed-Status.png" alt="closed status logo">
@@ -274,19 +276,49 @@ function showClosedIssue(data) {
 allBtn.addEventListener("click", function () {
   setActiveTab(allBtn);
   showSection(allSection);
-  countGithubIssue(allSection);
+
+  if (currentSearchResults) {
+    const allData = currentSearchResults;
+    document.getElementById("cards-parent").innerHTML = "";
+    loadData(allData);
+    issueCount.innerText = allData.length;
+  } else {
+    countGithubIssue(allSection);
+  }
 });
+
 openBtn.addEventListener("click", function () {
   setActiveTab(openBtn);
   showSection(openSection);
-  countGithubIssue(openSection);
-  loadOpenIssue();
+
+  if (currentSearchResults) {
+    const openData = currentSearchResults.filter(
+      (issue) => issue.status === "open",
+    );
+    document.getElementById("open-section-parent").innerHTML = "";
+    showOpenIssue(openData);
+    issueCount.innerText = openData.length;
+  } else {
+    countGithubIssue(openSection);
+    loadOpenIssue();
+  }
 });
+
 closedBtn.addEventListener("click", function () {
   setActiveTab(closedBtn);
   showSection(closedSection);
-  countGithubIssue(closedSection);
-  loadClosedIssue();
+
+  if (currentSearchResults) {
+    const closedData = currentSearchResults.filter(
+      (issue) => issue.status === "closed",
+    );
+    document.getElementById("closed-section-parent").innerHTML = "";
+    showClosedIssue(closedData);
+    issueCount.innerText = closedData.length;
+  } else {
+    countGithubIssue(closedSection);
+    loadClosedIssue();
+  }
 });
 
 async function loadIssue() {
@@ -325,14 +357,37 @@ document.addEventListener("click", (elm) => {
 });
 
 searchBtn.addEventListener("click", async () => {
-  const searchText = searchInput.value.trim().toLowerCase();
+  searchBtn.addEventListener("click", async () => {
+    const searchText = searchInput.value.trim().toLowerCase();
 
-  console.log(searchText);
+    if (!searchText) return;
 
-  const result = await fetch(
-    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`,
-  );
+    showSpinner();
 
-  const data = await result.json();
-  console.log(data);
+    const result = await fetch(
+      `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`,
+    );
+
+    const data = await result.json();
+    const searchIssues = data.data;
+
+    currentSearchResults = searchIssues;
+
+    document.getElementById("cards-parent").innerHTML = "";
+    document.getElementById("open-section-parent").innerHTML = "";
+    document.getElementById("closed-section-parent").innerHTML = "";
+
+    loadData(searchIssues);
+    issueCount.innerText = searchIssues.length;
+
+    const openData = searchIssues.filter((issue) => issue.status === "open");
+    showOpenIssue(openData);
+
+    const closedData = searchIssues.filter(
+      (issue) => issue.status === "closed",
+    );
+    showClosedIssue(closedData);
+
+    hideSpinner();
+  });
 });
