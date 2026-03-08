@@ -178,7 +178,7 @@ function showOpenIssue(data) {
                         <div class="flex items-center justify-between">
                             <img src="./assets/Open-Status.png" alt="open status">
                             <button
-                                class="${btnColor} py-[6px] px-6 text-xs font-bold capitalize rounded-full">${element.priority}
+                                class="${btnColor} py-[6px] px-6 text-xs font-bold uppercase rounded-full">${element.priority}
                             </button>
                         </div>
 
@@ -237,12 +237,12 @@ function showClosedIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-          <div onclick="openIssueModal(${element.id})" id="card" class="bg-white border-t-4 border-t-[#A754F5] hover:shadow-[#a754f570] rounded-lg shadow-lg cursor-pointer">
+          <div onclick="openIssueModal(${element.id})" id="card" class="bg-white border-t-4 border-t-[#A754F5] hover:shadow-[#9a33fcad] rounded-lg shadow-lg cursor-pointer">
             <div class="pt-4 px-4">
                 <div class="flex items-center justify-between">
                     <img src="./assets/Closed-Status.png" alt="closed status logo">
                     <button
-                        class="${btnColor} py-[6px] px-6 text-xs font-bold capitalize rounded-full">${element.priority}
+                        class="${btnColor} py-[6px] px-6 text-xs font-bold uppercase rounded-full">${element.priority}
                     </button>
                 </div>
 
