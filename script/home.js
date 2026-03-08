@@ -262,7 +262,7 @@ function showClosedIssue(data) {
 allBtn.addEventListener("click", function () {
   setActiveTab(allBtn);
   showSection(allSection);
-  countGithubIssue(allSection);
+  showSearchValue(allIssues, currentSearch);
 });
 openBtn.addEventListener("click", function () {
   setActiveTab(openBtn);
@@ -310,8 +310,8 @@ document.addEventListener("click", (elm) => {
 });
 
 searchBtn.addEventListener("click", () => {
-  const searchValue = searchInput.value.trim().toLowerCase();
-  showSearchValue(allIssues, searchValue);
+  currentSearch = searchInput.value.trim().toLowerCase();
+  showSearchValue(allIssues, currentSearch);
 });
 
 function showSearchValue(data, searchedWord) {
