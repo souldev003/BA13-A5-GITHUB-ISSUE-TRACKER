@@ -17,6 +17,8 @@ const searchBtn = document.getElementById("search-btn");
 
 const originalBtnHTML = searchBtn.innerHTML;
 
+let currentSearch = "";
+
 //Active Tab Functions:
 function setActiveTab(clickedBtn) {
   allBtn.classList.remove("btn-primary", "btn-active");
@@ -309,15 +311,13 @@ document.addEventListener("click", (elm) => {
 
 searchBtn.addEventListener("click", () => {
   const searchValue = searchInput.value.trim().toLowerCase();
-
-  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
-    .then((res) => res.json())
-    .then((data) => {
-      showSearchValue(data.data, searchValue);
-    });
+  showSearchValue(allIssues, searchValue);
 });
 
 function showSearchValue(data, searchedWord) {
+  const parentDiv = document.getElementById("cards-parent");
+  parentDiv.innerHTML = "";
+
   const filteredWord = data.filter(
     (element) =>
       element.status.toLowerCase().includes(searchedWord) ||
@@ -326,5 +326,8 @@ function showSearchValue(data, searchedWord) {
       element.description.toLowerCase().includes(searchedWord) ||
       element.title.toLowerCase().includes(searchedWord),
   );
-  console.log(filteredWord);
+
+  loadData(filteredWord);
+
+  issueCount.innerText = filteredWord.length;
 }
