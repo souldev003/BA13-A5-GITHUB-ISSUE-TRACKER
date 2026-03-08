@@ -17,8 +17,6 @@ const searchBtn = document.getElementById("search-btn");
 
 const originalBtnHTML = searchBtn.innerHTML;
 
-let currentSearch = "";
-
 //Active Tab Functions:
 function setActiveTab(clickedBtn) {
   allBtn.classList.remove("btn-primary", "btn-active");
@@ -161,12 +159,12 @@ function showOpenIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-                  <div id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg shadow-lg cursor-pointer">
+                  <div id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg cursor-pointer">
                     <div class="pt-4 px-4">
                         <div class="flex items-center justify-between">
                             <img src="./assets/Open-Status.png" alt="open status">
                             <button
-                                class="${btnColor} py-[6px] px-6 text-xs font-bold uppercase rounded-full">${element.priority}
+                                class="${btnColor} py-[6px] px-6 text-xs font-bold capitalize rounded-full">${element.priority}
                             </button>
                         </div>
 
@@ -223,12 +221,12 @@ function showClosedIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-          <div id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg shadow-lg cursor-pointer">
+          <div id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg cursor-pointer">
             <div class="pt-4 px-4">
                 <div class="flex items-center justify-between">
                     <img src="./assets/Closed-Status.png" alt="closed status logo">
                     <button
-                        class="${btnColor} py-[6px] px-6 text-xs font-bold uppercase rounded-full">${element.priority}
+                        class="${btnColor} py-[6px] px-6 text-xs font-bold capitalize rounded-full">${element.priority}
                     </button>
                 </div>
 
@@ -262,41 +260,19 @@ function showClosedIssue(data) {
 allBtn.addEventListener("click", function () {
   setActiveTab(allBtn);
   showSection(allSection);
-  showSearchValue(allIssues, currentSearch);
+  countGithubIssue(allSection);
 });
-
 openBtn.addEventListener("click", function () {
   setActiveTab(openBtn);
   showSection(openSection);
-
-  const filteredOpen = openIssues.filter(
-    (element) =>
-      element.status.toLowerCase().includes(currentSearch) ||
-      element.priority.toLowerCase().includes(currentSearch) ||
-      element.author.toLowerCase().includes(currentSearch) ||
-      element.description.toLowerCase().includes(currentSearch) ||
-      element.title.toLowerCase().includes(currentSearch),
-  );
-
-  showOpenIssue(filteredOpen);
-  issueCount.innerText = filteredOpen.length;
+  countGithubIssue(openSection);
+  loadOpenIssue();
 });
-
 closedBtn.addEventListener("click", function () {
   setActiveTab(closedBtn);
   showSection(closedSection);
-
-  const filteredClosed = closedIssues.filter(
-    (element) =>
-      element.status.toLowerCase().includes(currentSearch) ||
-      element.priority.toLowerCase().includes(currentSearch) ||
-      element.author.toLowerCase().includes(currentSearch) ||
-      element.description.toLowerCase().includes(currentSearch) ||
-      element.title.toLowerCase().includes(currentSearch),
-  );
-
-  showClosedIssue(filteredClosed);
-  issueCount.innerText = filteredClosed.length;
+  countGithubIssue(closedSection);
+  loadClosedIssue();
 });
 
 async function loadIssue() {
@@ -332,14 +308,16 @@ document.addEventListener("click", (elm) => {
 });
 
 searchBtn.addEventListener("click", () => {
-  currentSearch = searchInput.value.trim().toLowerCase();
-  showSearchValue(allIssues, currentSearch);
+  const searchValue = searchInput.value.trim().toLowerCase();
+
+  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+    .then((res) => res.json())
+    .then((data) => {
+      showSearchValue(data.data, searchValue);
+    });
 });
 
 function showSearchValue(data, searchedWord) {
-  const parentDiv = document.getElementById("cards-parent");
-  parentDiv.innerHTML = "";
-
   const filteredWord = data.filter(
     (element) =>
       element.status.toLowerCase().includes(searchedWord) ||
@@ -348,8 +326,5 @@ function showSearchValue(data, searchedWord) {
       element.description.toLowerCase().includes(searchedWord) ||
       element.title.toLowerCase().includes(searchedWord),
   );
-
-  loadData(filteredWord);
-
-  issueCount.innerText = filteredWord.length;
+  console.log(filteredWord);
 }
