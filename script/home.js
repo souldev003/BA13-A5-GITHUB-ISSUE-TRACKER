@@ -271,8 +271,11 @@ openBtn.addEventListener("click", function () {
 
   const filteredOpen = openIssues.filter(
     (element) =>
-      element.title.toLowerCase().includes(currentSearch) ||
-      element.description.toLowerCase().includes(currentSearch),
+      element.status.toLowerCase().includes(currentSearch) ||
+      element.priority.toLowerCase().includes(currentSearch) ||
+      element.author.toLowerCase().includes(currentSearch) ||
+      element.description.toLowerCase().includes(currentSearch) ||
+      element.title.toLowerCase().includes(currentSearch),
   );
 
   showOpenIssue(filteredOpen);
@@ -282,8 +285,18 @@ openBtn.addEventListener("click", function () {
 closedBtn.addEventListener("click", function () {
   setActiveTab(closedBtn);
   showSection(closedSection);
-  countGithubIssue(closedSection);
-  loadClosedIssue();
+
+  const filteredClosed = closedIssues.filter(
+    (element) =>
+      element.status.toLowerCase().includes(currentSearch) ||
+      element.priority.toLowerCase().includes(currentSearch) ||
+      element.author.toLowerCase().includes(currentSearch) ||
+      element.description.toLowerCase().includes(currentSearch) ||
+      element.title.toLowerCase().includes(currentSearch),
+  );
+
+  showClosedIssue(filteredClosed);
+  issueCount.innerText = filteredClosed.length;
 });
 
 async function loadIssue() {
