@@ -161,12 +161,12 @@ function showOpenIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-                  <div id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg cursor-pointer">
+                  <div id="card" class="bg-white border-t-4 border-t-[#00A96E] rounded-lg shadow-lg cursor-pointer">
                     <div class="pt-4 px-4">
                         <div class="flex items-center justify-between">
                             <img src="./assets/Open-Status.png" alt="open status">
                             <button
-                                class="${btnColor} py-[6px] px-6 text-xs font-bold capitalize rounded-full">${element.priority}
+                                class="${btnColor} py-[6px] px-6 text-xs font-bold uppercase rounded-full">${element.priority}
                             </button>
                         </div>
 
@@ -223,12 +223,12 @@ function showClosedIssue(data) {
           : "bg-[#EEEFF2] text-[#9CA3AF]";
 
     card.innerHTML = `
-          <div id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg cursor-pointer">
+          <div id="card" class="bg-white border-t-4 border-t-[#A754F5] rounded-lg shadow-lg cursor-pointer">
             <div class="pt-4 px-4">
                 <div class="flex items-center justify-between">
                     <img src="./assets/Closed-Status.png" alt="closed status logo">
                     <button
-                        class="${btnColor} py-[6px] px-6 text-xs font-bold capitalize rounded-full">${element.priority}
+                        class="${btnColor} py-[6px] px-6 text-xs font-bold uppercase rounded-full">${element.priority}
                     </button>
                 </div>
 
@@ -264,12 +264,21 @@ allBtn.addEventListener("click", function () {
   showSection(allSection);
   showSearchValue(allIssues, currentSearch);
 });
+
 openBtn.addEventListener("click", function () {
   setActiveTab(openBtn);
   showSection(openSection);
-  countGithubIssue(openSection);
-  loadOpenIssue();
+
+  const filteredOpen = openIssues.filter(
+    (element) =>
+      element.title.toLowerCase().includes(currentSearch) ||
+      element.description.toLowerCase().includes(currentSearch),
+  );
+
+  showOpenIssue(filteredOpen);
+  issueCount.innerText = filteredOpen.length;
 });
+
 closedBtn.addEventListener("click", function () {
   setActiveTab(closedBtn);
   showSection(closedSection);
