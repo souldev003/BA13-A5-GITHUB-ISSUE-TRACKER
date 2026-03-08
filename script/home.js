@@ -306,3 +306,25 @@ document.addEventListener("click", (elm) => {
     searchBtn.innerHTML = originalBtnHTML;
   }
 });
+
+searchBtn.addEventListener("click", () => {
+  const searchValue = searchInput.value.trim().toLowerCase();
+
+  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+    .then((res) => res.json())
+    .then((data) => {
+      showSearchValue(data.data, searchValue);
+    });
+});
+
+function showSearchValue(data, searchedWord) {
+  const filteredWord = data.filter(
+    (element) =>
+      element.status.toLowerCase().includes(searchedWord) ||
+      element.priority.toLowerCase().includes(searchedWord) ||
+      element.author.toLowerCase().includes(searchedWord) ||
+      element.description.toLowerCase().includes(searchedWord) ||
+      element.title.toLowerCase().includes(searchedWord),
+  );
+  console.log(filteredWord);
+}
