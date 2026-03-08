@@ -17,6 +17,16 @@ const searchBtn = document.getElementById("search-btn");
 
 const originalBtnHTML = searchBtn.innerHTML;
 
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+  spinner.classList.remove("hidden");
+}
+
+function hideSpinner() {
+  spinner.classList.add("hidden");
+}
+
 //Active Tab Functions:
 function setActiveTab(clickedBtn) {
   allBtn.classList.remove("btn-primary", "btn-active");
@@ -133,12 +143,14 @@ function countGithubIssue(section) {
 
 //Load Open Section area
 async function loadOpenIssue() {
+  showSpinner();
   const result = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
 
   const data = await result.json();
   showOpenIssue(data.data);
+  hideSpinner();
 }
 
 function showOpenIssue(data) {
@@ -196,12 +208,14 @@ function showOpenIssue(data) {
 
 //Load Closed section area
 async function loadClosedIssue() {
+  showSpinner();
   const result = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
 
   const data = await result.json();
   showClosedIssue(data.data);
+  hideSpinner();
 }
 
 function showClosedIssue(data) {
@@ -276,6 +290,8 @@ closedBtn.addEventListener("click", function () {
 });
 
 async function loadIssue() {
+  showSpinner();
+
   const result = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
@@ -288,6 +304,7 @@ async function loadIssue() {
 
   loadData(allIssues);
   countGithubIssue(allSection);
+  hideSpinner();
 }
 
 loadIssue();
@@ -307,24 +324,6 @@ document.addEventListener("click", (elm) => {
   }
 });
 
-searchBtn.addEventListener("click", () => {
-  const searchValue = searchInput.value.trim().toLowerCase();
-
-  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
-    .then((res) => res.json())
-    .then((data) => {
-      showSearchValue(data.data, searchValue);
-    });
-});
-
-function showSearchValue(data, searchedWord) {
-  const filteredWord = data.filter(
-    (element) =>
-      element.status.toLowerCase().includes(searchedWord) ||
-      element.priority.toLowerCase().includes(searchedWord) ||
-      element.author.toLowerCase().includes(searchedWord) ||
-      element.description.toLowerCase().includes(searchedWord) ||
-      element.title.toLowerCase().includes(searchedWord),
-  );
-  console.log(filteredWord);
+async function searchIssue(searchText) {
+  const result = fetch("");
 }
